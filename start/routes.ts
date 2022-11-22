@@ -24,5 +24,5 @@ Route.get('/', async () => {
   return { hello: 'world' }
 })
 
-Route.resource("reservations", "ReservationsController");
+Route.resource("reservations", "ReservationsController");//solo llama los metodos que estan dentro del controlador
 

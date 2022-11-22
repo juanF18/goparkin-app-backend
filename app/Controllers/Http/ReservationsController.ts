@@ -5,14 +5,14 @@ import Reservation from "App/Models/Reservation";
 
 export default class ReservationsController {
     async store({ request, response }:HttpContextContract) {
-        const data = request.input(["date","hour","status"]);
-        const reservation = new Reservation();
-        reservation.date = new Date();
-        reservation.hour = Date.now();
-        reservation.status = "No Aproved";
-        //faltan las llaves foraneas
-        await reservation.save();
-        response.json({ "Se ha agregado un nuevo usuario": data });
+        // const data = request.input("date");
+        // const reservation = new Reservation();
+        // reservation.date = new Date();
+        // reservation.hour = Date.now();//en formato militar
+        // reservation.status = "No Aproved";//se asigna por defecto, que la reserva no está aprovada
+        // //faltan las llaves foraneas
+        // await reservation.save();
+        response.json({ message:"Se ha agregado un nuevo usuario" });//falta implementar
       }
     
       async index({ response }:HttpContextContract) {
