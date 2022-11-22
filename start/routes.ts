@@ -24,5 +24,8 @@ Route.get('/', async () => {
   return { hello: 'world' }
 })
 
-Route.resource("reservations", "ReservationsController");//solo llama los metodos que estan dentro del controlador
-
+Route.get("/reservations","ReservationsController.index");
+Route.post("/reservations","ReservationsController.store");
+Route.get("/reservations/:id","ReservationsController.show");
+Route.put("/reservations/:id","ReservationsController.update");
+Route.delete("/reservations/:id","ReservationsController.destroy");
