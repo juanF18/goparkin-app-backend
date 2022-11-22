@@ -24,7 +24,7 @@ export default class ReservationsController {
       }
     
       async show({ response, params }:HttpContextContract) {//dado un id muestra las reservas con ese id
-        const reservation = await Database.from("reervation")
+        const reservation = await Database.from("reservations")
           .where("id", params.id)
           .select("*");
         return response.json({
