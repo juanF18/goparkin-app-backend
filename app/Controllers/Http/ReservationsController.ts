@@ -1,10 +1,10 @@
-// import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 import Database from "@ioc:Adonis/Lucid/Database";
 import Reservation from "App/Models/Reservation";
 
 export default class ReservationsController {
-    async store({ request, response }) {
+    async store({ request, response }:HttpContextContract) {
         const data = request.input(["date","hour","status"]);
         const reservation = new Reservation();
         reservation.date = new Date();
@@ -15,7 +15,7 @@ export default class ReservationsController {
         response.json({ "Se ha agregado un nuevo usuario": data });
       }
     
-      async index({ response }) {
+      async index({ response }:HttpContextContract) {
         const reservation = await Reservation.all();
         response.json({
           message: "Todas las reservas",
@@ -23,7 +23,7 @@ export default class ReservationsController {
         });
       }
     
-      async show({ response, params }) {//dado un id muestra las reservas con ese id
+      async show({ response, params }:HttpContextContract) {//dado un id muestra las reservas con ese id
         const reservation = await Database.from("reervation")
           .where("id", params.id)
           .select("*");
@@ -33,7 +33,7 @@ export default class ReservationsController {
         });
       }
     
-      async update({ request, response, params }) {//cambia el status, dado un id
+      async update({ request, response, params }:HttpContextContract) {//cambia el status, dado un id
         const reservation = await Reservation.findOrFail(params.id);
         reservation.status = request.input("status");
         await reservation.save();
@@ -43,7 +43,7 @@ export default class ReservationsController {
         });
       }
     
-      async destroy({ response, params }) {//elimina reserva dado un id
+      async destroy({ response, params }:HttpContextContract) {//elimina reserva dado un id
         const reservation = await Reservation.findOrFail(params.id);
         await reservation.delete();
         return response.json({ message: "Se ha eliminado la reserva con ese id" });
