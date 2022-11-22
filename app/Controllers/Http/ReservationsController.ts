@@ -19,7 +19,7 @@ export default class ReservationsController {
         const reservation = await Reservation.all();
         response.json({
           message: "Todas las reservas",
-          users: reservation,
+          reservations: reservation,
         });
       }
     
