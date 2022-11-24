@@ -6,11 +6,11 @@ export default class Raiting extends BaseModel {
   public id: number
 
   @column()
-  public raiting: number;
+  public raiting: number
 
   @column()
-  public comment:string;
-  
+  public comment: string
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
