@@ -2,11 +2,13 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Person from 'App/Models/Person'
 import Encryption from '@ioc:Adonis/Core/Encryption'
 
-export default class PersonsController {
+export default class PersonController {
+
   /**
    * Lista todas las personas
    * @returns retorna todas las personas
    */
+
   public async index(ctx: HttpContextContract) {
     let persons: Person[] = await Person.query()
     return persons
@@ -21,7 +23,7 @@ export default class PersonsController {
     const body = request.body()
     body.password = Encryption.encrypt(body.password)
     const person: Person = await Person.create(body)
-    return Person
+    return person
   }
 
   /**
@@ -30,7 +32,8 @@ export default class PersonsController {
    * @returns persona
    */
   public async show({ params }: HttpContextContract) {
-    return Person.findOrFail(params.id)
+    let person = await Person.query().where('id', params.id)
+    return person
   }
 
   /**
@@ -39,7 +42,7 @@ export default class PersonsController {
    * @param params toma los valores del la ruta
    * @returns retorna la persona actualizada
    */
-  public async update({ request, params }: HttpContextContract) {
+  public async update({ params, request }: HttpContextContract) {
     const body = request.body()
     const person: Person = await Person.findOrFail(params.id)
     person.name = body.name
