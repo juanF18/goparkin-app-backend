@@ -6,7 +6,10 @@ export default class extends BaseSchema {
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-
+      //Referencias de las tablas implicadas
+      table.integer('id_rol').unsigned().references('rols.id').onDelete('CASCADE')
+      table.integer('id_permission').unsigned().references('permissions.id').onDelete('CASCADE')
+      table.unique(['id_rol', 'id_permission'])
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
        */
