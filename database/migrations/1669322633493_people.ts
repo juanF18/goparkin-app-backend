@@ -12,7 +12,9 @@ export default class extends BaseSchema {
       table.string('email', 400).notNullable()
       table.string('password', 400).notNullable().unique()
 
-
+      /**
+       * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
+       */
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
     })

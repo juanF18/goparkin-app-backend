@@ -6,7 +6,7 @@ export default class RolsController {
    * Lista los roles
    * @returns retorna todos los roles
    */
-   public async index(ctx: HttpContextContract) {
+  public async index(ctx: HttpContextContract) {
     let rol: Rol[] = await Rol.query()
     return rol
   }

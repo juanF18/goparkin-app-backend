@@ -6,7 +6,7 @@ export default class PermissionsController {
    * Lista los permisos
    * @returns retorna todos los permisos
    */
-   public async index(ctx: HttpContextContract) {
+  public async index(ctx: HttpContextContract) {
     let permission: Permission[] = await Permission.query()
     return permission
   }

@@ -6,7 +6,7 @@ export default class VehiclesController {
    * Lista los vehículos
    * @returns retorna todos los vehículos
    */
-   public async index(ctx: HttpContextContract) {
+  public async index(ctx: HttpContextContract) {
     let vehicle: Vehicle[] = await Vehicle.query()
     return vehicle
   }
