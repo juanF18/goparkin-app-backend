@@ -12,10 +12,10 @@ export default class UsersController {
   }
 
   /**
-  * Almacena un nuevo user
-  * @param request Toma los valores del body
-  * @returns retorna el user agregado
-  */
+   * Almacena un nuevo user
+   * @param request Toma los valores del body
+   * @returns retorna el user agregado
+   */
   public async store({ request }: HttpContextContract) {
     const body = request.body()
     const user: User = await User.create(body)
@@ -23,10 +23,10 @@ export default class UsersController {
   }
 
   /**
- * Muestra un user según un id
- * @param params Toma los valores de la ruta
- * @returns user
- */
+   * Muestra un user según un id
+   * @param params Toma los valores de la ruta
+   * @returns user
+   */
   public async show({ params }: HttpContextContract) {
     let user = await User.query().where('id', params.id)
     return user
@@ -54,5 +54,3 @@ export default class UsersController {
     return user.delete()
   }
 }
-
-

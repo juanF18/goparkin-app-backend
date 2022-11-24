@@ -6,19 +6,19 @@ export default class Person extends BaseModel {
   public id: number
 
   @column()
-  public name: string;
+  public name: string
 
   @column()
-  public last_name: string;
+  public last_name: string
 
   @column()
-  public phone: string;
+  public phone: string
 
   @column()
-  public email: string;
+  public email: string
 
   @column()
-  public password: string;
+  public password: string
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
