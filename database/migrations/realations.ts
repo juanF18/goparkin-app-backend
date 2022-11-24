@@ -6,14 +6,14 @@ export default class extends BaseSchema {
     /**
      * personas pueden ser muchos usuarios
      */
-    this.schema.alterTable('user', (table) => {
+    this.schema.alterTable('users', (table) => {
       table.integer('id_person').unsigned().references('people.id')
     })
 
     /**
      * personas puede ser muchos dueños
      */
-    this.schema.alterTable('owner', (table) => {
+    this.schema.alterTable('owners', (table) => {
       table.integer('id_person').unsigned().references('people.id')
     })
 
@@ -63,7 +63,7 @@ export default class extends BaseSchema {
      * Un usuario puede tener muchos ratings
      * Un parqueadero tiene muchos ratings
      */
-    this.schema.alterTable('ratings', (table) => {
+    this.schema.alterTable('raitings', (table) => {
       table.integer('id_parking').unsigned().references('parkings.id').onDelete('CASCADE')
       table.integer('id_user').unsigned().references('users.id')
     })
