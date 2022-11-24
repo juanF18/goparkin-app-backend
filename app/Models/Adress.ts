@@ -15,10 +15,10 @@ export default class Adress extends BaseModel {
   public adress: string
 
   @column()
-  public latitud: string
+  public latitude: string
 
   @column()
-  public longitud: string
+  public longitude: string
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

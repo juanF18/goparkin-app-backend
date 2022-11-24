@@ -43,7 +43,7 @@ export default class PersonsController {
     const body = request.body()
     const person: Person = await Person.findOrFail(params.id)
     person.name = body.name
-    person.lastName = body.lastName
+    person.last_name = body.last_name
     person.phone = body.phone
     person.email = body.email
     person.password = Encryption.encrypt(body.password)
