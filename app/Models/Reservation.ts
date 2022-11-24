@@ -1,9 +1,17 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
+import Parking from './Parking'
+import User from './User'
 
 export default class Reservation extends BaseModel {
   @column({ isPrimary: true })
   public id: number
+
+  @column()
+  public id_parking: number
+
+  @column()
+  public id_user: number
 
   @column()
   public date: Date
@@ -19,5 +27,20 @@ export default class Reservation extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
-}
 
+  /**
+   * Muchas reservaciones le pertenecen a un parqueadero
+   */
+  @belongsTo(() => Parking, {
+    foreignKey: 'id_parking',
+  })
+  public parking: BelongsTo<typeof Parking>
+
+  /**
+   * Muchas reservaciones le pertenecen a un usuario
+   */
+  @belongsTo(() => User, {
+    foreignKey: 'id_user',
+  })
+  public user: BelongsTo<typeof User>
+}

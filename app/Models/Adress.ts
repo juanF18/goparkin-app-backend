@@ -6,6 +6,9 @@ export default class Adress extends BaseModel {
   public id: number
 
   @column()
+  public id_parking: number
+
+  @column()
   public city: string
 
   @column()
