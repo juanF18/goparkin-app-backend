@@ -27,9 +27,9 @@ export default class ParkingsController {
      */
 
     public async show({params}:HttpContextContract) {
-        let parking= await Parking.query().where('id',params.id)
+        let parking = await Parking.query().where('id',params.id)
         return parking
-        
+
     }
 
     /**
@@ -40,10 +40,10 @@ export default class ParkingsController {
     public async update({ params, request }: HttpContextContract) {
         const cont = request.body()
         const parking: Parking = await Parking.findOrFail(params.id)
-        parking.parkingName= cont.parkingName;
-        parking.hourPriceCar= cont.hourPriceCar;
-        parking.hourPriceMotorcycle= cont.hourPriceMotorcycle;
-        parking.openDays=cont.openDays;
+        parking.parking_name= cont.parking_name;
+        parking.hour_price_car= cont.hour_price_car;
+        parking.hour_price_motorcycle= cont.hour_price_motorcycle;
+        parking.open_days=cont.open_days;
         return parking.save()
     }
 

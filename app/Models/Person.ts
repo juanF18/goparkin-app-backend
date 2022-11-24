@@ -9,7 +9,7 @@ export default class Person extends BaseModel {
   public name: string;
 
   @column()
-  public lastName: string;
+  public last_name: string;
 
   @column()
   public phone: string;

@@ -6,17 +6,16 @@ export default class Parking extends BaseModel {
   public id: number
 
   @column()
-  public parkingName: string
+  public parking_name: string
 
   @column()
-  public hourPriceCar: number
+  public hour_price_car: number
 
   @column()
-  public hourPriceMotorcycle: number
+  public hour_price_motorcycle: number
 
   @column()
-  public openDays: string
-
+  public open_days: string
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

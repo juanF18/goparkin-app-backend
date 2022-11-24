@@ -6,16 +6,16 @@ export default class ParkingSpace extends BaseModel {
   public id: number
 
   @column()
-  public spacesCar: number
+  public spaces_car: number
 
   @column()
-  public spacesMotorcycle: number
+  public spaces_motorcycle: number
 
   @column()
-  public availableSpacesCar: number
+  public available_spaces_car: number
 
   @column()
-  public availableSpacesMotorcycle: number
+  public available_spaces_motorcycle: number
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

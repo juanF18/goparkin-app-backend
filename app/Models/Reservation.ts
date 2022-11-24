@@ -6,17 +6,18 @@ export default class Reservation extends BaseModel {
   public id: number
 
   @column()
-  public idUser:number
+  public date: Date
 
   @column()
-  public idParking:number
+  public hour: number
 
   @column()
-  public date:Date
+  public status: string
 
-  @column()
-  public hour:number
-x
-  @column()
-  public status:string
+  @column.dateTime({ autoCreate: true })
+  public createdAt: DateTime
+
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  public updatedAt: DateTime
 }
+
