@@ -3,7 +3,6 @@ import Person from 'App/Models/Person'
 import Encryption from '@ioc:Adonis/Core/Encryption'
 
 export default class PeopleController {
-
   /**
    * Lista todas las personas
    * @returns retorna todas las personas

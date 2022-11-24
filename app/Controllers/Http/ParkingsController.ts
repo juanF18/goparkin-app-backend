@@ -1,11 +1,10 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import Parking from 'App/Models/Parking';
+import Parking from 'App/Models/Parking'
 
 export default class ParkingsController {
-
   /**
-  * Lista todos los parqueaderos
-  */
+   * Lista todos los parqueaderos
+   */
 
   public async index(ctx: HttpContextContract) {
     let parkings: Parking[] = await Parking.query()
@@ -29,7 +28,6 @@ export default class ParkingsController {
   public async show({ params }: HttpContextContract) {
     let parking = await Parking.query().where('id', params.id)
     return parking
-
   }
 
   /**
@@ -40,19 +38,18 @@ export default class ParkingsController {
   public async update({ params, request }: HttpContextContract) {
     const cont = request.body()
     const parking: Parking = await Parking.findOrFail(params.id)
-    parking.parking_name = cont.parking_name;
-    parking.hour_price_car = cont.hour_price_car;
-    parking.hour_price_motorcycle = cont.hour_price_motorcycle;
-    parking.open_days = cont.open_days;
+    parking.parking_name = cont.parking_name
+    parking.hour_price_car = cont.hour_price_car
+    parking.hour_price_motorcycle = cont.hour_price_motorcycle
+    parking.open_days = cont.open_days
     return parking.save()
   }
 
   /**
-  * Elimina a un usuario basado en el identificador
-  */
+   * Elimina a un usuario basado en el identificador
+   */
   public async destroy({ params }: HttpContextContract) {
-    const the_parking = await Parking.findOrFail(params.id);
-    return the_parking.delete();
+    const parking = await Parking.findOrFail(params.id)
+    return parking.delete()
   }
-
 }

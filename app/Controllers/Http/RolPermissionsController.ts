@@ -6,7 +6,7 @@ export default class RolPermissionsController {
    * Lista los rol-permisos
    * @returns retorna todos lo rol-permisos
    */
-   public async index(ctx: HttpContextContract) {
+  public async index(ctx: HttpContextContract) {
     let rolPermiso: RolPermission[] = await RolPermission.query()
     return rolPermiso
   }
