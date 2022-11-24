@@ -25,7 +25,7 @@ export default class DocumentsController {
   /**
    * Muestra un documento basado en el id
    * @param params toma los datos de la ruta
-   * @returns Docuemtno
+   * @returns Documento
    */
   public async show({ params }: HttpContextContract) {
     let document = await Document.query().where('id', params.id)
