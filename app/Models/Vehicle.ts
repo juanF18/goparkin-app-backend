@@ -1,9 +1,13 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
+import User from './User'
 
 export default class Vehicle extends BaseModel {
   @column({ isPrimary: true })
   public id: number
+
+  @column()
+  public id_user: number
 
   @column()
   public plate: string
@@ -16,4 +20,9 @@ export default class Vehicle extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
+
+  @belongsTo(() => User, {
+    foreignKey: 'id_user',
+  })
+  public user: BelongsTo<typeof User>
 }

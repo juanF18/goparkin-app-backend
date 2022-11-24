@@ -6,6 +6,9 @@ export default class ParkingSpace extends BaseModel {
   public id: number
 
   @column()
+  public id_parking: number
+
+  @column()
   public spaces_car: number
 
   @column()
