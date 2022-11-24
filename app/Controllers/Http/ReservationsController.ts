@@ -4,48 +4,62 @@ import Database from "@ioc:Adonis/Lucid/Database";
 import Reservation from "App/Models/Reservation";
 
 export default class ReservationsController {
-    async store({ request, response }:HttpContextContract) {
-        // const data = request.input("date");
-        // const reservation = new Reservation();
-        // reservation.date = new Date();
-        // reservation.hour = Date.now();//en formato militar
-        // reservation.status = "No Aproved";//se asigna por defecto, que la reserva no está aprovada
-        // //faltan las llaves foraneas
-        // await reservation.save();
-        response.json({ message:"Se ha agregado un nuevo usuario" });//falta implementar
-      }
-    
-      async index({ response }:HttpContextContract) {
-        const reservation = await Reservation.all();
-        response.json({
-          message: "Todas las reservas",
-          reservations: reservation,
-        });
-      }
-    
-      async show({ response, params }:HttpContextContract) {//dado un id muestra las reservas con ese id
-        const reservation = await Database.from("reservations")
-          .where("id", params.id)
-          .select("*");
-        return response.json({
-          message: "Buscando por id",
-          data: reservation,
-        });
-      }
-    
-      async update({ request, response, params }:HttpContextContract) {//cambia el status, dado un id
-        const reservation = await Reservation.findOrFail(params.id);
-        reservation.status = request.input("status");
-        await reservation.save();
-        return response.json({
-          message: "Actualizando por id",
-          data: reservation,
-        });
-      }
-    
-      async destroy({ response, params }:HttpContextContract) {//elimina reserva dado un id
-        const reservation = await Reservation.findOrFail(params.id);
-        await reservation.delete();
-        return response.json({ message: "Se ha eliminado la reserva con ese id" });
-      }
+
+    /**
+   *  Lista todas las reservas
+   * @returns todas las reservas
+   */
+     public async index(ctx: HttpContextContract) {
+      const reservation: Reservation[] = await Reservation.query()
+      return reservation
+    }
+  
+    /**
+     * Almacena una nueva reserva con su respectiva informacion
+     * @param request toma los datos del body
+     * @returns nuevo espacio de reserva
+     */
+    public async store({ request }: HttpContextContract) {
+      const body = request.body()
+      const reservation: Reservation = await Reservation.create(body)
+      return reservation
+    }
+  
+    /**
+     * Muesta una reserva basado en su ip
+     * @param params id
+     * @returns una reserva o nulo si el id no existe
+     */
+    public async show({ params }: HttpContextContract) {
+      let reservation: Reservation = await Reservation.findOrFail(params.id)
+      return reservation
+    }
+  
+    /**
+     * Actualiza la informacion de la reserva basado en el id
+     * @param params id
+     * @param request toma los datos del body
+     * @returns la reserva actualizada
+     */
+    public async update({ params, request }: HttpContextContract) {
+      const body = request.body()
+      const reservation: Reservation = await Reservation.findOrFail(params.id)
+      reservation.idUser = body.idUser
+      reservation.idParking = body.idParking
+      reservation.date = body.date
+      reservation.hour = body.hour
+      reservation.status = body.status
+      return reservation.save()
+    }
+  
+    /**
+     * Elimina una reserva basado en el id
+     * @param params id
+     * @returns reserva eliminada
+     */
+    public async destroy({ params }: HttpContextContract) {
+      const reservation: Reservation = await Reservation.findOrFail(params.id)
+      return reservation.delete()
+    }
+  
 }
