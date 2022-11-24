@@ -12,7 +12,7 @@ export default class Document extends BaseModel {
   public comment: string
 
   @column()
-  public status: boolean
+  public status: string
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

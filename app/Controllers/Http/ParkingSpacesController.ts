@@ -41,10 +41,10 @@ export default class ParkingSpacesController {
   public async update({ params, request }: HttpContextContract) {
     const body = request.body()
     const parkingSpace: ParkingSpace = await ParkingSpace.findOrFail(params.id)
-    parkingSpace.spacesCar = body.spacesCar
-    parkingSpace.spacesMotorcycle = body.spacesMotorcycle
-    parkingSpace.availableSpacesCar = body.availableSpaceCar
-    parkingSpace.availableSpacesMotorcycle = body.availableSpaceMotorcycle
+    parkingSpace.spaces_car = body.spaces_car
+    parkingSpace.spaces_motorcycle = body.spaces_motorcycle
+    parkingSpace.available_spaces_car = body.available_spaces_car
+    parkingSpace.available_spaces_motorcycle = body.available_spaces_motorcycle
 
     return parkingSpace.save()
   }

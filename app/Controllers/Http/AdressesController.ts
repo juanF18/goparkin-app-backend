@@ -43,8 +43,8 @@ export default class AdressesController {
     adress.city = body.city
     adress.department = body.department
     adress.adress = body.adress
-    adress.latitud = body.latitud
-    adress.longitud = body.longitud
+    adress.latitude = body.latitude
+    adress.longitude = body.longitude
     return adress.save()
   }
 
