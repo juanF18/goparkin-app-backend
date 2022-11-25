@@ -1,6 +1,8 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Person from 'App/Models/Person'
+import User from 'App/Models/User'
 import Encryption from '@ioc:Adonis/Core/Encryption'
+import Owner from 'App/Models/Owner'
 
 export default class PeopleController {
   /**
@@ -18,11 +20,26 @@ export default class PeopleController {
    * @param request Toma los valores del body
    * @returns retorna la persona agregada
    */
-  public async store({ request }: HttpContextContract) {
+  public async store({ request, params }: HttpContextContract) {
     const body = request.body()
     body.password = Encryption.encrypt(body.password)
-    const person: Person = await Person.create(body)
-    return person
+    let person: Person
+
+    if (params.type === 'user') {
+      body.id_rol = 1
+      person = await Person.create(body)
+      const user: User = await User.create({ id_person: person.id })
+      return { person, user }
+    } else if (params.type === 'owner') {
+      body.id_rol = 3
+      person = await Person.create(body)
+      const owner: Owner = await Owner.create({ id_person: person.id })
+      return { person, owner }
+    } else {
+      return {
+        mensaje: 'No se puede crear',
+      }
+    }
   }
 
   /**
