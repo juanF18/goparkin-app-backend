@@ -42,7 +42,7 @@ export default class Reservation extends BaseModel {
   /**
    * A la reservación le pertenece una persona
    */
-   @belongsTo(() => Person, {
+  @belongsTo(() => Person, {
     foreignKey: 'id_people',
   })
   public person: BelongsTo<typeof Person>
