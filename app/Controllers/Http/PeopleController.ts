@@ -3,6 +3,8 @@ import Person from 'App/Models/Person'
 import User from 'App/Models/User'
 import Encryption from '@ioc:Adonis/Core/Encryption'
 import Owner from 'App/Models/Owner'
+import EmailService from 'App/Services/EmailService'
+import PasswordService from 'App/Services/PasswordService'
 
 export default class PeopleController {
   /**
@@ -21,21 +23,42 @@ export default class PeopleController {
    * @returns retorna la persona agregada
    */
   public async store({ request, params }: HttpContextContract) {
+
+    // Recupera la data desde la soliciud
     const body = request.body()
-    body.password = Encryption.encrypt(body.password)
+
+    // Genera la contraseña aleatoria y la encripta en la BD
+    let passwordService: PasswordService = new PasswordService()
+    let password = passwordService.createPassword(10)
+    body.password = Encryption.encrypt(password)
+
+    // Genera una instancia del servicio de correos
+    let emailService: EmailService = new EmailService()
+
     let person: Person
 
+    // Crear un usuario o un dueño según llegue el parámetro por url
     if (params.type === 'user') {
+      // Envía el correo de confirmación con las credenciales de inicio de sesión
+      emailService.sendConfirmedEmail(body.email, body.name, password)
+
       body.id_rol = 1
       person = await Person.create(body)
       const user: User = await User.create({ id_person: person.id })
       return { person, user }
-    } else if (params.type === 'owner') {
-      body.id_rol = 3
+
+    }
+    else if (params.type === 'owner') {
+      // Envía el correo de confirmación con las credenciales de inicio de sesión
+      emailService.sendConfirmedEmail(body.email, body.name, password)
+
+      body.id_rol = 2
       person = await Person.create(body)
       const owner: Owner = await Owner.create({ id_person: person.id })
       return { person, owner }
-    } else {
+    }
+
+    else {
       return {
         mensaje: 'No se puede crear',
       }
