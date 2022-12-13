@@ -24,7 +24,7 @@ export default class Vehicle extends BaseModel {
   /**
    * Al vehículo le pertenece una persona
    */
-   @belongsTo(() => Person, {
+  @belongsTo(() => Person, {
     foreignKey: 'id_people',
   })
   public person: BelongsTo<typeof Person>

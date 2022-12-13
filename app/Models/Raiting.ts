@@ -36,7 +36,7 @@ export default class Raiting extends BaseModel {
   /**
    * El raiting le pertenece una persona
    */
-   @belongsTo(() => Person, {
+  @belongsTo(() => Person, {
     foreignKey: 'id_people',
   })
   public person: BelongsTo<typeof Person>
