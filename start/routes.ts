@@ -107,3 +107,9 @@ Route.post('/vehicle', 'VehiclesController.store')
 Route.get('/vehicle/:id', 'VehiclesController.show')
 Route.put('/vehicle/:id', 'VehiclesController.update')
 Route.delete('/vehicle/:id', 'VehiclesController.destroy')
+
+Route.post("/login","SeguridadController.login");
+Route.post("/forgot","SeguridadController.forgotPassword");
+Route.post("/reset","SeguridadController.resetPassword");
+Route.post("/logout","SeguridadController.logout");
+
