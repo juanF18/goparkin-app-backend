@@ -2,7 +2,6 @@ import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 
 export default class extends BaseSchema {
   public async up() {
-
     //Relaciones 1 a 1
     /**
      * Un parqueadero tiene un documento

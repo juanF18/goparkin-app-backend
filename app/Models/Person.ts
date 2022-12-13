@@ -54,7 +54,7 @@ export default class Person extends BaseModel {
   /**
    * Una persona tiene muchos raitings
    */
-   @hasMany(() => Raiting, {
+  @hasMany(() => Raiting, {
     foreignKey: 'id_people',
   })
   public raitings: HasMany<typeof Raiting>
@@ -62,7 +62,7 @@ export default class Person extends BaseModel {
   /**
    * Una persona tiene muchas reservaciones
    */
-   @hasMany(() => Reservation, {
+  @hasMany(() => Reservation, {
     foreignKey: 'id_people',
   })
   public reservations: HasMany<typeof Reservation>
@@ -70,7 +70,7 @@ export default class Person extends BaseModel {
   /**
    * Una persona tiene muchos parqueaderos
    */
-   @hasMany(() => Parking, {
+  @hasMany(() => Parking, {
     foreignKey: 'id_people',
   })
   public parkings: HasMany<typeof Parking>
@@ -78,9 +78,8 @@ export default class Person extends BaseModel {
   /**
    * Una persona tiene muchos documentos
    */
-   @hasMany(() => Document, {
+  @hasMany(() => Document, {
     foreignKey: 'id_people',
   })
   public documents: HasMany<typeof Document>
-
 }

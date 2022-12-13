@@ -31,7 +31,7 @@ export default class Document extends BaseModel {
   /**
    * Al documento le pertenece una persona
    */
-   @belongsTo(() => Person, {
+  @belongsTo(() => Person, {
     foreignKey: 'id_people',
   })
   public person: BelongsTo<typeof Person>
@@ -39,7 +39,7 @@ export default class Document extends BaseModel {
   /**
    * Al documento le pertenece un parqueadero
    */
-   @belongsTo(() => Parking, {
+  @belongsTo(() => Parking, {
     foreignKey: 'id_parking',
   })
   public parking: BelongsTo<typeof Parking>
