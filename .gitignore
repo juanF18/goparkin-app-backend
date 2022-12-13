@@ -7,3 +7,4 @@ coverage
 tmp
 desktop.ini
 yarn.lock
+yarn-error.log
