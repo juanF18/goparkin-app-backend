@@ -14,14 +14,14 @@ import Adress from './Adress'
 import ParkingSpace from './ParkingSpace'
 import Reservation from './Reservation'
 import Raiting from './Raiting'
-import Owner from './Owner'
+import Person from './Person'
 
 export default class Parking extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
   @column()
-  public id_owner: number
+  public id_people: number
 
   @column()
   public parking_name: string
@@ -41,11 +41,14 @@ export default class Parking extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
-  // pertenece a
-  @belongsTo(() => Owner, {
-    foreignKey: 'id_owner',
+  /**
+   * Al parqueadero le pertenece una persona
+   */
+   @belongsTo(() => Person, {
+    foreignKey: 'id_people',
   })
-  public owner: BelongsTo<typeof Owner>
+  public person: BelongsTo<typeof Person>
+
   // Relaciones 1 a 1
   /**
    * Un parqueadero tiene un docuemnto
