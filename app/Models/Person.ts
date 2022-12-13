@@ -1,9 +1,11 @@
 import { DateTime } from 'luxon'
 import { BaseModel, BelongsTo, belongsTo, column, HasMany, hasMany } from '@ioc:Adonis/Lucid/Orm'
-import Owner from './Owner'
-import User from './User'
-import Admin from './Admin'
 import Rol from './Rol'
+import Vehicle from './Vehicle'
+import Raiting from './Raiting'
+import Reservation from './Reservation'
+import Parking from './Parking'
+import Document from './Document'
 
 export default class Person extends BaseModel {
   @column({ isPrimary: true })
@@ -34,7 +36,7 @@ export default class Person extends BaseModel {
   public updatedAt: DateTime
 
   /**
-   * a la persona le pertenece un rol
+   * A la persona le pertenece un rol
    */
   @belongsTo(() => Rol, {
     foreignKey: 'id_rol',
@@ -42,26 +44,43 @@ export default class Person extends BaseModel {
   public rol: BelongsTo<typeof Rol>
 
   /**
-   * Personas tiene muchos dueños
+   * Una persona tiene muchos vehiculos
    */
-  @hasMany(() => Owner, {
-    foreignKey: 'id_person',
+  @hasMany(() => Vehicle, {
+    foreignKey: 'id_people',
   })
-  public owners: HasMany<typeof Owner>
+  public vehicles: HasMany<typeof Vehicle>
 
   /**
-   * Personas tiene muchos usuarios
+   * Una persona tiene muchos raitings
    */
-  @hasMany(() => User, {
-    foreignKey: 'id_person',
+   @hasMany(() => Raiting, {
+    foreignKey: 'id_people',
   })
-  public users: HasMany<typeof User>
+  public raitings: HasMany<typeof Raiting>
 
   /**
-   * Personas tiene muchos admins
+   * Una persona tiene muchas reservaciones
    */
-  @hasMany(() => Admin, {
-    foreignKey: 'id_person',
+   @hasMany(() => Reservation, {
+    foreignKey: 'id_people',
   })
-  public admins: HasMany<typeof Admin>
+  public reservations: HasMany<typeof Reservation>
+
+  /**
+   * Una persona tiene muchos parqueaderos
+   */
+   @hasMany(() => Parking, {
+    foreignKey: 'id_people',
+  })
+  public parkings: HasMany<typeof Parking>
+
+  /**
+   * Una persona tiene muchos documentos
+   */
+   @hasMany(() => Document, {
+    foreignKey: 'id_people',
+  })
+  public documents: HasMany<typeof Document>
+
 }
