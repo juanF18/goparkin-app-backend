@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon'
 import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
 import Parking from './Parking'
-import User from './User'
+import Person from './Person'
 
 export default class Raiting extends BaseModel {
   @column({ isPrimary: true })
@@ -11,7 +11,7 @@ export default class Raiting extends BaseModel {
   public id_parking: number
 
   @column()
-  public id_user: number
+  public id_people: number
 
   @column()
   public raiting: number
@@ -34,10 +34,10 @@ export default class Raiting extends BaseModel {
   public parking: BelongsTo<typeof Parking>
 
   /**
-   * muchos rating le pertenecen a un Usuario
+   * El raiting le pertenece una persona
    */
-  @belongsTo(() => User, {
-    foreignKey: 'id_user',
+   @belongsTo(() => Person, {
+    foreignKey: 'id_people',
   })
-  public user: BelongsTo<typeof User>
+  public person: BelongsTo<typeof Person>
 }

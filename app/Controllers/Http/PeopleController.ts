@@ -1,10 +1,10 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Person from 'App/Models/Person'
-import User from 'App/Models/User'
 import Encryption from '@ioc:Adonis/Core/Encryption'
 import Owner from 'App/Models/Owner'
 import EmailService from 'App/Services/EmailService'
 import PasswordService from 'App/Services/PasswordService'
+
 
 export default class PeopleController {
   /**
@@ -22,6 +22,7 @@ export default class PeopleController {
    * @param request Toma los valores del body
    * @returns retorna la persona agregada
    */
+
   public async store({ request, params }: HttpContextContract) {
 
     // Recupera la data desde la soliciud
@@ -63,7 +64,9 @@ export default class PeopleController {
         mensaje: 'No se puede crear',
       }
     }
+
   }
+
 
   /**
    * Muestra una persona según un id

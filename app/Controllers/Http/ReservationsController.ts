@@ -41,6 +41,7 @@ export default class ReservationsController {
   public async update({ params, request }: HttpContextContract) {
     const body = request.body()
     const reservation: Reservation = await Reservation.findOrFail(params.id)
+    reservation.plate = body.plate
     reservation.date = body.date
     reservation.hour = body.hour
     reservation.status = body.status

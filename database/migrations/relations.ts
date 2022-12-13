@@ -2,36 +2,15 @@ import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 
 export default class extends BaseSchema {
   public async up() {
-    // Herencia
-    /**
-     * personas pueden ser muchos usuarios
-     */
-    this.schema.alterTable('users', (table) => {
-      table.integer('id_person').unsigned().references('people.id')
-    })
-
-    /**
-     * personas puede ser muchos dueños
-     */
-    this.schema.alterTable('owners', (table) => {
-      table.integer('id_person').unsigned().references('people.id')
-    })
-
-    /**
-     * personas pueden ser muchos administradore
-     */
-    this.schema.alterTable('admins', (table) => {
-      table.integer('id_person').unsigned().references('people.id')
-    })
 
     //Relaciones 1 a 1
     /**
      * Un parqueadero tiene un documento
-     * Un administrador puede revisar muchos documentos
+     * Una persona puede revisar muchos documentos
      */
     this.schema.alterTable('documents', (table) => {
       table.integer('id_parking').unsigned().references('parkings.id').onDelete('CASCADE')
-      table.integer('id_admin').unsigned().references('admins.id')
+      table.integer('id_people').unsigned().references('people.id')
     })
 
     /**
@@ -51,39 +30,39 @@ export default class extends BaseSchema {
     // Relaciones muchos a muchos
 
     /**
-     * Un usuario tiene muchas reservaciones
+     * Una persona tiene muchas reservaciones
      * Un parqueadero tiene muchas reservaciones
      */
     this.schema.alterTable('reservations', (table) => {
       table.integer('id_parking').unsigned().references('parkings.id').onDelete('CASCADE')
-      table.integer('id_user').unsigned().references('users.id')
+      table.integer('id_people').unsigned().references('people.id')
     })
 
     /**
-     * Un usuario puede tener muchos ratings
+     * Una persona puede tener muchos ratings
      * Un parqueadero tiene muchos ratings
      */
     this.schema.alterTable('raitings', (table) => {
       table.integer('id_parking').unsigned().references('parkings.id').onDelete('CASCADE')
-      table.integer('id_user').unsigned().references('users.id')
+      table.integer('id_people').unsigned().references('people.id')
     })
 
     /**
-     * Un dueño tiene muchos parqueaderos
+     * Una persona tiene muchos parqueaderos
      */
     this.schema.alterTable('parkings', (table) => {
-      table.integer('id_owner').unsigned().references('owners.id').onDelete('CASCADE')
+      table.integer('id_people').unsigned().references('people.id').onDelete('CASCADE')
     })
 
     /**
-     * Un dueño tiene muchos parqueaderos
+     * Una persona tiene muchos vehiculos
      */
     this.schema.alterTable('vehicles', (table) => {
-      table.integer('id_user').unsigned().references('users.id')
+      table.integer('id_people').unsigned().references('people.id')
     })
 
     /**
-     * Un rol le pertenece a muchos usuarios
+     * Un rol le pertenece a muchas personas
      */
 
     this.schema.alterTable('people', (table) => {
