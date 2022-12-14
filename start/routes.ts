@@ -24,12 +24,6 @@ Route.get('/', async () => {
   return { hello: 'world' }
 })
 
-Route.get('/admin', 'AdminsController.index')
-Route.post('/admin', 'AdminsController.store')
-Route.get('/admin/:id', 'AdminsController.show')
-Route.put('/admin/:id', 'AdminsController.update')
-Route.delete('/admin/:id', 'AdminsController.destroy')
-
 Route.get('/adress', 'AdressesController.index')
 Route.post('/adress', 'AdressesController.store')
 Route.get('/adress/:id', 'AdressesController.show')
@@ -41,12 +35,6 @@ Route.post('/document', 'DocumentsController.store')
 Route.get('/document:id', 'DocumentsController.show')
 Route.put('/document:id', 'DocumentsController.update')
 Route.delete('/document:id', 'DocumentsController.destroy')
-
-Route.get('/owner', 'OwnersController.index')
-Route.post('/owner', 'OwnersController.store')
-Route.get('/owner/:id', 'OwnersController.show')
-Route.put('/owner/:id', 'OwnersController.update')
-Route.delete('/owner/:id', 'OwnersController.destroy')
 
 Route.get('/parking', 'ParkingsController.index')
 Route.post('/parking', 'ParkingsController.store')
@@ -67,7 +55,7 @@ Route.put('/permission/:id', 'PermissionsController.update')
 Route.delete('/permission/:id', 'PermissionsController.destroy')
 
 Route.get('/people', 'PeopleController.index')
-Route.post('/people/:type', 'PeopleController.store')
+Route.post('/people', 'PeopleController.store')
 Route.get('/people/:id', 'PeopleController.show')
 Route.put('/people/:id', 'PeopleController.update')
 Route.delete('/people/:id', 'PeopleController.destroy')
@@ -95,12 +83,6 @@ Route.post('/rol_permission', 'RolPermissionsController.store')
 Route.get('/rol_permission/:id', 'RolPermissionsController.show')
 Route.put('/rol_permission/:id', 'RolPermissionsController.update')
 Route.delete('/rol_permission/:id', 'RolPermissionsController.destroy')
-
-Route.get('/user', 'UsersController.index')
-Route.post('/user', 'UsersController.store')
-Route.get('/user/:id', 'UsersController.show')
-Route.put('/user/:id', 'UsersController.update')
-Route.delete('/user/:id', 'UsersController.destroy')
 
 Route.get('/vehicle', 'VehiclesController.index')
 Route.post('/vehicle', 'VehiclesController.store')
