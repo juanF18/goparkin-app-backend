@@ -1,7 +1,6 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Person from 'App/Models/Person'
 import Encryption from '@ioc:Adonis/Core/Encryption'
-import Owner from 'App/Models/Owner'
 import EmailService from 'App/Services/EmailService'
 import PasswordService from 'App/Services/PasswordService'
 
@@ -23,7 +22,7 @@ export default class PeopleController {
    * @returns retorna la persona agregada
    */
 
-  public async store({ request, params }: HttpContextContract) {
+  public async store({ request }: HttpContextContract) {
 
     // Recupera la data desde la soliciud
     const body = request.body()
@@ -36,35 +35,13 @@ export default class PeopleController {
     // Genera una instancia del servicio de correos
     let emailService: EmailService = new EmailService()
 
+    // Envía el correo de confirmación con las credenciales de inicio de sesión
+    emailService.sendConfirmedEmail(body.email, body.name, password)
+
+    // Crea la persona
     let person: Person
-
-    // Crear un usuario o un dueño según llegue el parámetro por url
-    if (params.type === 'user') {
-      // Envía el correo de confirmación con las credenciales de inicio de sesión
-      emailService.sendConfirmedEmail(body.email, body.name, password)
-
-      body.id_rol = 1
-      person = await Person.create(body)
-      const user: User = await User.create({ id_person: person.id })
-      return { person, user }
-
-    }
-    else if (params.type === 'owner') {
-      // Envía el correo de confirmación con las credenciales de inicio de sesión
-      emailService.sendConfirmedEmail(body.email, body.name, password)
-
-      body.id_rol = 2
-      person = await Person.create(body)
-      const owner: Owner = await Owner.create({ id_person: person.id })
-      return { person, owner }
-    }
-
-    else {
-      return {
-        mensaje: 'No se puede crear',
-      }
-    }
-
+    person = await Person.create(body)
+    return person
   }
 
 
