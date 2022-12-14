@@ -1,11 +1,13 @@
 import { DateTime } from 'luxon'
-import { BaseModel, BelongsTo, belongsTo, column, HasMany, hasMany } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, beforeSave, BelongsTo, belongsTo, column, HasMany, hasMany } from '@ioc:Adonis/Lucid/Orm'
 import Rol from './Rol'
 import Vehicle from './Vehicle'
 import Raiting from './Raiting'
 import Reservation from './Reservation'
 import Parking from './Parking'
 import Document from './Document'
+import ApiToken from './ApiToken'
+import Hash from '@ioc:Adonis/Core/Hash'
 
 export default class Person extends BaseModel {
   @column({ isPrimary: true })
@@ -82,4 +84,21 @@ export default class Person extends BaseModel {
     foreignKey: 'id_people',
   })
   public documents: HasMany<typeof Document>
+
+
+ 
+@hasMany(() => ApiToken,{
+  foreignKey: 'user_id',
+})
+public people: HasMany<typeof ApiToken>
+
+
+@beforeSave()
+public static async hashPassword (the_person: Person) {
+  if (the_person.$dirty.password) {
+    the_person.password = await Hash.make(the_person.password)
+  }
 }
+
+}
+
