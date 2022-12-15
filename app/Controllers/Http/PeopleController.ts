@@ -2,8 +2,7 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Person from 'App/Models/Person'
 import Encryption from '@ioc:Adonis/Core/Encryption'
 import EmailService from 'App/Services/EmailService'
-import PasswordService from 'App/Services/PasswordService'
-
+//import PasswordService from 'App/Services/PasswordService'
 
 export default class PeopleController {
   /**
@@ -25,16 +24,14 @@ export default class PeopleController {
   public async store({ request }: HttpContextContract) {
     // Recupera la data desde la soliciud
     const body = request.body()
+
     // Genera una instancia del servicio de correos
     let emailService: EmailService = new EmailService()
     // Envía el correo de confirmación con las credenciales de inicio de sesión
     emailService.sendConfirmedEmail(body.email, body.name, body.password)
-    // Encripta la contraseña antes de enviarla a la BD
-    body.password = Encryption.encrypt(body.password)
 
     // Crea la persona
-    let person: Person
-    person = await Person.create(body)
+    let person: Person = await Person.create(body)
     return person
   }
 

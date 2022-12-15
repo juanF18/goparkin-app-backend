@@ -13,5 +13,6 @@ export default class extends BaseSchema {
     this.schema.dropTableIfExists('permissions')
     this.schema.dropTableIfExists('people')
     this.schema.dropTableIfExists('rol_permissions')
+    this.schema.dropTableIfExists('api_tokens')
   }
 }
