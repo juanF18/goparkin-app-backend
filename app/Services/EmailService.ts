@@ -11,7 +11,6 @@ export default class EmailService {
    */
 
   public sendConfirmedEmail(email: string, name: string, password: string) {
-
     const sgMail = require('@sendgrid/mail')
     sgMail.setApiKey(Env.get('SENDGRID_API_KEY'))
 
@@ -19,19 +18,26 @@ export default class EmailService {
       to: email,
       from: Env.get('SENDGRID_FROM_EMAIL'),
 
-      subject: "Credentials GoParking",
+      subject: 'Credentials GoParking',
 
-      html: "<div style='text-align: center; background: #6916c5; color: white; font-family: Helvetica; font-size: 13px;'>" +
-        "<br>" +
+      html:
+        "<div style='text-align: center; background: #6916c5; color: white; font-family: Helvetica; font-size: 13px;'>" +
+        '<br>' +
         "<h1 style='font-family: Baloo Bhai; font-size: 30px;'>GoParking</h1>" +
-        "<p>Hi <strong> " + name + ", </strong> welcome !</p>" +
-        "<p>User : <strong> " + email + " </strong></p>" +
-        "<p>Password : <strong> " + password + " </strong></p>" +
-        "<button type='button' style='background: #5cb85c; cursor: pointer; font-family: Helvetica; font-size: 13px; color:white; width: 80px; height: 28px; border-radius: 4px; border-color: #5cb85c' href='http://localhost:3333/login' target='_blank'> Sign in </button>" +
-        "<br>" +
-        "<br>" +
-        "<br>" +
-        "</div>"
+        '<p>Hi <strong> ' +
+        name +
+        ', </strong> welcome !</p>' +
+        '<p>User : <strong> ' +
+        email +
+        ' </strong></p>' +
+        '<p>Password : <strong> ' +
+        password +
+        ' </strong></p>' +
+        "<button type='button' style='background: #5cb85c; cursor: pointer; font-family: Helvetica; font-size: 13px; color:white; width: 80px; height: 28px; border-radius: 4px; border-color: #5cb85c' href='http://192.168.1.8:3000/login' target='_blank'> Sign in </button>" +
+        '<br>' +
+        '<br>' +
+        '<br>' +
+        '</div>',
     }
     sgMail
       .send(msg)
@@ -81,7 +87,7 @@ export default class EmailService {
         <br>
         <br>
         </div>
-        `
+        `,
     }
     sgMail
       .send(msg)
