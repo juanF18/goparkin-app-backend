@@ -68,13 +68,20 @@ export default class EmailService {
       to: emailTo,
       from: Env.get('SENDGRID_FROM_EMAIL'),
       subject: theSubject,
+
       html: `
-      <h1><strong>Welcome to Go Parking</strong></h1>
-      <h3>HI</h3>
-      <p>Tu email es: <strong>${emailTo}</strong></p>
-      <p>Tu nueva password: <strong>${newPassword}</strong></p>
-      <p><em>Remember change your password for your security.</em></p>
-      `,
+        <div style='text-align: center; background: #6916c5; color: white; font-family: Helvetica; font-size: 13px;'>
+        <br>
+        <h1 style='font-family: Baloo Bhai; font-size: 30px;'>GoParking</h1>
+        <p>Hi, our new credentials</p>
+        <p>User : <strong> ${emailTo} </strong></p>
+        <p>Password : <strong> ${newPassword} </strong></p>
+        <p><em>Remember change your password for your security.</p>
+        <br>
+        <br>
+        <br>
+        </div>
+        `
     }
     sgMail
       .send(msg)
