@@ -7,14 +7,14 @@ export default class ApiToken extends BaseModel {
   public id: number
 
   @column()
-  public user_id: number
+  public id_people: number
 
   @column()
   public name: string
- 
+
   @column()
   public type: string
- 
+
   @column()
   public token: string
 
@@ -24,8 +24,8 @@ export default class ApiToken extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
-  @belongsTo(() => Person,{
-    localKey: 'user_id',
+  @belongsTo(() => Person, {
+    localKey: 'id_people',
   })
   public rol: BelongsTo<typeof Person>
 }

@@ -1,6 +1,5 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column, HasMany, hasMany, ManyToMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
-import User from './Person'
 import Permission from './Permission'
 import Person from './Person'
 
@@ -21,9 +20,9 @@ export default class Rol extends BaseModel {
    * Un rol lo pueden tener muchas personas
    */
   @hasMany(() => Person, {
-    foreignKey: 'id_rol',
+    foreignKey: 'id_people',
   })
-  public users: HasMany<typeof User>
+  public people: HasMany<typeof Person>
 
   /**
    * Muchos roles pueden tener muchos permisos
