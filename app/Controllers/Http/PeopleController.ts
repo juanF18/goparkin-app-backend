@@ -23,27 +23,20 @@ export default class PeopleController {
    */
 
   public async store({ request }: HttpContextContract) {
-
     // Recupera la data desde la soliciud
     const body = request.body()
-
-    // Genera la contraseña aleatoria y la encripta en la BD
-    let passwordService: PasswordService = new PasswordService()
-    let password = passwordService.createPassword(10)
-    body.password = Encryption.encrypt(password)
-
     // Genera una instancia del servicio de correos
     let emailService: EmailService = new EmailService()
-
     // Envía el correo de confirmación con las credenciales de inicio de sesión
-    emailService.sendConfirmedEmail(body.email, body.name, password)
+    emailService.sendConfirmedEmail(body.email, body.name, body.password)
+    // Encripta la contraseña antes de enviarla a la BD
+    body.password = Encryption.encrypt(body.password)
 
     // Crea la persona
     let person: Person
     person = await Person.create(body)
     return person
   }
-
 
   /**
    * Muestra una persona según un id

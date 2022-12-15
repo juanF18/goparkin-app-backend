@@ -8,7 +8,7 @@ export default class EmailService {
    * @param name Nombre del usuario o dueño nuevo
    * @param password Contraseña asignada por el sistema
    */
-  sendConfirmedEmail(email, name, password) {
+  sendConfirmedEmail(email: string, name: string, password: string) {
 
     const sgMail = require('@sendgrid/mail')
     sgMail.setApiKey(Env.get('SENDGRID_API_KEY'))
@@ -17,12 +17,19 @@ export default class EmailService {
       to: email,
       from: Env.get('SENDGRID_FROM_EMAIL'),
 
-      subject: "Credentials Go Parking",
-      html: "<p>Hi <strong>"+name+"</strong></p>" +
-        "<p>Welcome to Go Parking</p>" +
-        "<p>User : <strong>"+email+"</strong></p>" +
-        "<p>Password : <strong>"+password+"</strong><em></em></p>" +
-        "<p><em>Remember change your password for your security.</em></p>"
+      subject: "Credentials GoParking",
+
+      html: "<div style='text-align: center; background: #6916c5; color: white; font-family: Helvetica; font-size: 13px;'>" +
+        "<br>" +
+        "<h1 style='font-family: Baloo Bhai; font-size: 30px;'>GoParking</h1>" +
+        "<p>Hi <strong> " + name + ", </strong> welcome !</p>" +
+        "<p>User : <strong> " + email + " </strong></p>" +
+        "<p>Password : <strong> " + password + " </strong></p>" +
+        "<button type='button' style='background: #5cb85c; cursor: pointer; font-family: Helvetica; font-size: 13px; color:white; width: 80px; height: 28px; border-radius: 4px; border-color: #5cb85c' href='http://localhost:3333/login' target='_blank'> Sign in </button>" +
+        "<br>" +
+        "<br>" +
+        "<br>" +
+        "</div>"
 
     }
     sgMail
