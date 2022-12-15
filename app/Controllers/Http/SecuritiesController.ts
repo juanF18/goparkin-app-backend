@@ -59,7 +59,7 @@ export default class SecuritiesController {
       })
 
       let servicioCorreo: EmailService = new EmailService()
-      servicioCorreo.sendNewPasswordEmail(email, 'Solicitud restablecimiento de contraseña')
+      servicioCorreo.sendNewPasswordEmail(email, 'Password Reset Request GoParking')
       respuesta = {
         status: 'success',
         message: 'Revisar el correo',
