@@ -90,7 +90,7 @@ Route.get('/vehicle/:id', 'VehiclesController.show')
 Route.put('/vehicle/:id', 'VehiclesController.update')
 Route.delete('/vehicle/:id', 'VehiclesController.destroy')
 
-Route.post("/login","SeguritiesController.login");
-Route.post("/forgot","SeguritiesController.forgotPassword");
-Route.post("/reset","SeguritiesController.resetPassword");
-Route.post("/logout","SeguritiesController.logout");
+Route.post('/login', 'SecuritiesController.login')
+Route.post('/forgot', 'SecuritiesController.forgotPassword')
+Route.post('/reset', 'SecuritiesController.resetPassword')
+Route.post('/logout', 'SecuritiesController.logout')

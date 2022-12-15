@@ -1,5 +1,14 @@
 import { DateTime } from 'luxon'
-import { BaseModel, beforeSave, BelongsTo, belongsTo, column, HasMany, hasMany } from '@ioc:Adonis/Lucid/Orm'
+import {
+  BaseModel,
+  beforeSave,
+  BelongsTo,
+  belongsTo,
+  column,
+  HasMany,
+  hasMany,
+} from '@ioc:Adonis/Lucid/Orm'
+import Hash from '@ioc:Adonis/Core/Hash'
 import Rol from './Rol'
 import Vehicle from './Vehicle'
 import Raiting from './Raiting'
@@ -7,9 +16,10 @@ import Reservation from './Reservation'
 import Parking from './Parking'
 import Document from './Document'
 import ApiToken from './ApiToken'
-import Hash from '@ioc:Adonis/Core/Hash'
 
 export default class Person extends BaseModel {
+  public static table = 'people'
+
   @column({ isPrimary: true })
   public id: number
 
@@ -85,20 +95,15 @@ export default class Person extends BaseModel {
   })
   public documents: HasMany<typeof Document>
 
+  @hasMany(() => ApiToken, {
+    foreignKey: 'id_people',
+  })
+  public people: HasMany<typeof ApiToken>
 
- 
-@hasMany(() => ApiToken,{
-  foreignKey: 'user_id',
-})
-public people: HasMany<typeof ApiToken>
-
-
-@beforeSave()
-public static async hashPassword (the_person: Person) {
-  if (the_person.$dirty.password) {
-    the_person.password = await Hash.make(the_person.password)
+  @beforeSave()
+  public static async hashPassword(thePerson: Person) {
+    if (thePerson.$dirty.password) {
+      thePerson.password = await Hash.make(thePerson.password)
+    }
   }
 }
-
-}
-
