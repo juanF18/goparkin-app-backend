@@ -2,6 +2,7 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Person from 'App/Models/Person'
 import Encryption from '@ioc:Adonis/Core/Encryption'
 import EmailService from 'App/Services/EmailService'
+import Parking from 'App/Models/Parking'
 //import PasswordService from 'App/Services/PasswordService'
 
 export default class PeopleController {
@@ -32,7 +33,14 @@ export default class PeopleController {
 
     // Crea la persona
     let person: Person = await Person.create(body)
+    /**
+     esto va a ser para el registro y que dependiendo del id 
+     me crea lo que es 
+    if (person.id_rol === 1) {
+    } else if (person.id_rol === 2) {
+    }
     return person
+     */
   }
 
   /**
