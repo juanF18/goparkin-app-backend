@@ -13,9 +13,7 @@ export default class SecuritiesController {
       }),
     })
 
-    const thePerson = await Person.query().where('email', post.email).firstOrFail()
-
-    console.log(await Hash.verify(thePerson.password, post.password))
+    const thePerson = await Person.findBy('email', post.email)
 
     if (thePerson) {
       if (await Hash.verify(thePerson.password, post.password)) {
@@ -44,26 +42,21 @@ export default class SecuritiesController {
       revoked: true,
     }
   }
-  public async forgotPassword({ auth, request }) {
+  public async forgotPassword({ request }) {
     let respuesta: Object = {}
     const email = request.input('email')
-    const thePerson = await Person.query().where('email', email).firstOrFail()
+    const thePerson = await Person.findBy('email', email)
     if (!thePerson) {
       respuesta = {
         status: 'error',
         message: 'El correo no está registrado en la plataforma',
       }
     } else {
-      const token = await auth.use('api').generate(thePerson, {
-        expiresIn: '60 mins',
-      })
-
       let servicioCorreo: EmailService = new EmailService()
       servicioCorreo.sendNewPasswordEmail(email, 'Password Reset Request GoParking')
       respuesta = {
         status: 'success',
         message: 'Revisar el correo',
-        token,
       }
     }
     return respuesta
@@ -72,7 +65,6 @@ export default class SecuritiesController {
     let respuesta: Object = {}
     try {
       await auth.use('api').authenticate()
-      auth.use('api').isAuthenticated
     } catch (error) {
       return {
         status: 'error',
