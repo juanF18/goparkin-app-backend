@@ -12,14 +12,33 @@ export default class DocumentsController {
   }
 
   /**
-   * Almacena un documento en la base de datos
+   * Almacena los documentos en local y crear un nuevo documento y
+   * lo almacena en la base de datos
    * @param request toma los datos del body
    * @returns retorna el documento guardado
    */
-  public async store({ request }: HttpContextContract) {
-    const body = request.body()
-    const document: Document = await Document.create(body)
-    return document
+  public async store({ request, response }: HttpContextContract) {
+    const document = request.file('document', {
+      extnames: ['pdf'],
+      size: '20mb',
+    })
+
+    if (document) {
+      await document.move('./public/Documents', {
+        name: `1.${document.extname}`,
+        overwrite: true,
+      })
+      const newDocument = new Document()
+      //newDocument.id_parking = 1
+      //newDocument.id_people = 10
+      newDocument.url = `/public/Documents/${document?.fileName}`
+      newDocument.comment = ''
+      newDocument.status = 'Pending'
+      await newDocument.save()
+      return response.status(200).send({ message: 'Document uploaded successfully' })
+    } else {
+      return response.status(400).send({ message: 'Error to upload file' })
+    }
   }
 
   /**
