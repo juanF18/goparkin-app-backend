@@ -18,7 +18,7 @@
 |
 */
 
-import Route from '@ioc:Adonis/Core/Route'
+import Route, { RouterContract } from '@ioc:Adonis/Core/Route'
 
 Route.get('/', async () => {
   return { hello: 'world' }
@@ -94,3 +94,10 @@ Route.post('/login', 'SecuritiesController.login')
 Route.post('/forgot', 'SecuritiesController.forgotPassword')
 Route.post('/reset', 'SecuritiesController.resetPassword')
 Route.post('/logout', 'SecuritiesController.logout')
+
+Route.get('/public/Documents/:file', async ({ params, response }) => {
+  const { file } = params
+  console.log(file)
+
+  return response.download(`/public/Documents/${file}.pdf`)
+})
