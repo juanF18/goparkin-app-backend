@@ -33,14 +33,7 @@ export default class PeopleController {
 
     // Crea la persona
     let person: Person = await Person.create(body)
-    /**
-     esto va a ser para el registro y que dependiendo del id 
-     me crea lo que es 
-    if (person.id_rol === 1) {
-    } else if (person.id_rol === 2) {
-    }
     return person
-     */
   }
 
   /**
