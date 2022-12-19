@@ -1,5 +1,8 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import Adress from 'App/Models/Adress'
+import Document from 'App/Models/Document'
 import Parking from 'App/Models/Parking'
+import ParkingSpace from 'App/Models/ParkingSpace'
 
 export default class ParkingsController {
   /**
@@ -16,9 +19,23 @@ export default class ParkingsController {
    */
 
   public async store({ request }: HttpContextContract) {
-    const cont = request.body()
-    const parking: Parking = await Parking.create(cont)
-    return parking
+    const bodyParking = request.body().parking
+    const parking: Parking = await Parking.create(bodyParking)
+
+    const bodyAddress = request.body().address
+    bodyAddress.id_parking = parking.id
+    const adress: Adress = await Adress.create(bodyAddress)
+
+    const bodyParkingSpace = request.body().parkingSpace
+    bodyParkingSpace.id_parking = parking.id
+    const parkingSpace: ParkingSpace = await ParkingSpace.create(bodyParkingSpace)
+
+    const bodyDocument = request.body().document
+    bodyDocument.id_parking = parking.id
+    bodyDocument.id_people = parking.id_people
+    const document: Document = await Document.create(bodyDocument)
+
+    return { parking, adress, parkingSpace, document}
   }
 
   /**
