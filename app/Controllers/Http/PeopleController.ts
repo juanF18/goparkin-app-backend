@@ -2,8 +2,6 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Person from 'App/Models/Person'
 import Encryption from '@ioc:Adonis/Core/Encryption'
 import EmailService from 'App/Services/EmailService'
-import Parking from 'App/Models/Parking'
-//import PasswordService from 'App/Services/PasswordService'
 
 export default class PeopleController {
   /**
@@ -59,6 +57,7 @@ export default class PeopleController {
     person.last_name = body.last_name
     person.phone = body.phone
     person.email = body.email
+    person.id_rol = body.id_rol
     person.password = Encryption.encrypt(body.password)
     return person.save()
   }

@@ -30,6 +30,12 @@ export default class Parking extends BaseModel {
   public hour_price_car: number
 
   @column()
+  public opening_hour: number
+
+  @column()
+  public closing_hour: number
+
+  @column()
   public hour_price_motorcycle: number
 
   @column()
