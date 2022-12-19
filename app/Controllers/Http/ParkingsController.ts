@@ -57,6 +57,8 @@ export default class ParkingsController {
     const parking: Parking = await Parking.findOrFail(params.id)
     parking.parking_name = cont.parking_name
     parking.hour_price_car = cont.hour_price_car
+    parking.opening_hour = cont.opening_hour
+    parking.closing_hour = cont.closing_hour
     parking.hour_price_motorcycle = cont.hour_price_motorcycle
     parking.open_days = cont.open_days
     return parking.save()
