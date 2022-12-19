@@ -8,6 +8,8 @@ export default class extends BaseSchema {
       table.increments('id')
       table.string('parking_name', 400).notNullable()
       table.integer('hour_price_car').notNullable()
+      table.time('opening_hour').notNullable()
+      table.time('closing_hour').notNullable()
       table.integer('hour_price_motorcycle').notNullable()
       table.string('open_days', 100).notNullable()
       /**
