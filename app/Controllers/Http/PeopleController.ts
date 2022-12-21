@@ -15,6 +15,16 @@ export default class PeopleController {
   }
 
   /**
+   *  Muestra persona y documento segun el id
+   * @param param : id de la persona
+   * @returns Retorna el usuario y el documento.
+   */
+  public async showDocument(ctx: HttpContextContract) {
+    let people = await Person.query().where('id_rol', 2).preload('documents').preload('parkings')
+    return people
+  }
+
+  /**
    * Almacena una nueva persona
    * @param request Toma los valores del body
    * @returns retorna la persona agregada

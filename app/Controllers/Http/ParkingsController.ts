@@ -10,7 +10,12 @@ export default class ParkingsController {
    */
 
   public async index(ctx: HttpContextContract) {
-    let parkings: Parking[] = await Parking.query()
+    let parkings: Parking[] = await Parking.query().preload('adress').preload('parkingSpace')
+    return parkings
+  }
+
+  public async parkingsDocuments(ctx: HttpContextContract) {
+    let parkings: Parking[] = await Parking.query().preload('person').preload('document')
     return parkings
   }
 
