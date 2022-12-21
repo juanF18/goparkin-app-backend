@@ -9,6 +9,13 @@ export default class RaitingsController {
     let raitings: Raiting[] = await Raiting.query()
     return raitings
   }
+    /**
+   * Lista todos los comentarios por parking
+   */
+    public async indexParking( {params }:  HttpContextContract) {
+      let raiting = await Raiting.query().where('id_parking', params.id)
+      return raiting
+    }
   /**
    * Almacena la información de un usuario
    */
