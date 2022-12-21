@@ -2,7 +2,7 @@ import { DateTime } from 'luxon'
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
 export default class RolPermission extends BaseModel {
-  public static table = 'rol_permission'
+  public static table = 'rol_permissions'
   @column({ isPrimary: true })
   public id: number
 
