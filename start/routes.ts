@@ -51,6 +51,7 @@ Route.delete('/parking_space/:id', 'ParkingSpacesController.destroy')
 Route.get('/permission', 'PermissionsController.index')
 Route.post('/permission', 'PermissionsController.store')
 Route.get('/permission/:id', 'PermissionsController.show')
+//Route.get('/permission/:id_rol', 'PermissionsController.showByRoleId')
 Route.put('/permission/:id', 'PermissionsController.update')
 Route.delete('/permission/:id', 'PermissionsController.destroy')
 

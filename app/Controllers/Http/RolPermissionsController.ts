@@ -28,7 +28,7 @@ export default class RolPermissionsController {
    * @returns rol-permiso
    */
   public async show({ params }: HttpContextContract) {
-    let rolPermission = await RolPermission.query().where('id', params.id)
+    let rolPermission = await RolPermission.query().where('id_rol', params.id)
     return rolPermission
   }
 
