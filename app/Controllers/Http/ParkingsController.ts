@@ -35,7 +35,7 @@ export default class ParkingsController {
     bodyDocument.id_people = parking.id_people
     const document: Document = await Document.create(bodyDocument)
 
-    return { parking, adress, parkingSpace, document}
+    return { parking, adress, parkingSpace, document }
   }
 
   /**
@@ -45,6 +45,15 @@ export default class ParkingsController {
   public async show({ params }: HttpContextContract) {
     let parking = await Parking.query().where('id', params.id)
     return parking
+  }
+
+  /**
+ * Muestra la información de los parquederos de un dueño
+ */
+
+  public async showOwner({ params }: HttpContextContract) {
+    let parkings: Parking[] = await Parking.query().where('id_people', params.id)
+    return parkings
   }
 
   /**
