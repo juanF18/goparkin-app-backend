@@ -53,6 +53,15 @@ export default class ParkingsController {
   }
 
   /**
+ * Muestra la información de los parquederos de un dueño
+ */
+
+  public async showOwner({ params }: HttpContextContract) {
+    let parkings: Parking[] = await Parking.query().where('id_people', params.id)
+    return parkings
+  }
+
+  /**
    * Actualiza la información de un usuario basado
    * en el identificador y nuevos parámetros
    */
